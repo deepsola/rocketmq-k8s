@@ -18,11 +18,9 @@
 ARG BASE_IMAGE='eclipse-temurin:8-jre-alpine'
 FROM $BASE_IMAGE
 
-RUN result=$(echo $BASE_IMAGE | grep "alpine") \
-    if [[ "$result" != "" ]]; \
-    then apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl; \
-    else yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet && yum clean all -y; \
-    fi
+RUN result=$(echo $BASE_IMAGE | grep "alpine"); \
+    [[ "$result" != "" ]] && apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl; \
+    [[ "$result" == "" ]] &&  yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet && yum clean all -y
 
 ARG user=rocketmq
 ARG group=rocketmq
