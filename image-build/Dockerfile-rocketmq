@@ -46,11 +46,8 @@ ENV ROCKETMQ_HOME  /home/rocketmq/rocketmq-${ROCKETMQ_VERSION}
 
 WORKDIR  ${ROCKETMQ_HOME}
 
-COPY rocketmq/rocketmq*/rocketmq*/* ${ROCKETMQ_HOME}/
-
-RUN ls ${ROCKETMQ_HOME}
-RUN ls ${ROCKETMQ_HOME}/rocketmq-5.0.1-SNAPSHOT/
-RUN tree ${ROCKETMQ_HOME}
+RUN cp -r rocketmq/rocketmq*/rocketmq*/* ${ROCKETMQ_HOME}/; \
+    ls ${ROCKETMQ_HOME}
     
 # Copy customized scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
