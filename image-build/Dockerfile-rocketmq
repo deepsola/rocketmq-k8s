@@ -46,12 +46,7 @@ ENV ROCKETMQ_HOME  /home/rocketmq/rocketmq-${ROCKETMQ_VERSION}
 
 WORKDIR  ${ROCKETMQ_HOME}
 
-COPY rocketmq/ ${ROCKETMQ_HOME}/dist
-
-# Install
-RUN set -eux; \
-	mv dist/* . ; \
-	rmdir dist
+COPY rocketmq/rocketmq*/rocketmq*/* ${ROCKETMQ_HOME}/
 
 RUN ls ${ROCKETMQ_HOME}
 RUN ls ${ROCKETMQ_HOME}/rocketmq-5.0.1-SNAPSHOT/
