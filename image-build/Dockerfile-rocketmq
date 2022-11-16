@@ -18,11 +18,9 @@
 ARG BASE_IMAGE='eclipse-temurin:8-jre-alpine'
 FROM $BASE_IMAGE
 
-RUN result=$(echo $BASE_IMAGE | grep "alpine"); \
-    [[ "$result" != "" ]] && apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl || true
+RUN apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl || true
 
-RUN result=$(echo $BASE_IMAGE | grep "centos"); \
-    [[ "$result" != "" ]] && yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet || true
+RUN yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet || true
 
 ARG user=rocketmq
 ARG group=rocketmq
@@ -32,12 +30,10 @@ ARG gid=3000
 # RocketMQ is run with user `rocketmq`, uid = 3000
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
-RUN result=$(echo $BASE_IMAGE | grep "alpine"); \
-    [[ "$result" != "" ]] && addgroup --gid ${gid} ${group} \
+RUN addgroup --gid ${gid} ${group} \
     && adduser --uid ${uid} -G ${group} ${user} -s /bin/bash -D || true
 
-RUN result=$(echo $BASE_IMAGE | grep "centos"); \
-    [[ "$result" != "" ]] && groupadd -g ${gid} ${group} \
+RUN groupadd -g ${gid} ${group} \
     && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user} || true
 
 ARG version
