@@ -18,7 +18,8 @@
 ARG BASE_IMAGE='eclipse-temurin:8-jre-alpine'
 FROM $BASE_IMAGE
 
-RUN if [[ $BASE_IMAGE == *alpine* ]]; \
+RUN result=$(echo $BASE_IMAGE | grep "alpine") \
+    if [[ "$result" != "" ]]; \
     then apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl; \
     else yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet && yum clean all -y; \
     fi
