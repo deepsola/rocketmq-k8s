@@ -28,6 +28,8 @@ IMAGE_REPO_PASSWORD=$4
 
 TAG=${ROCKETMQ_VERSION}-`echo $BASE_IMAGE | sed -e "s/:/-/g"`
 
+cp -r ../../rocketmq ./
+
 docker login --username=$IMAGE_REPO_USERNAME --password=$IMAGE_REPO_PASSWORD cn-cicd-repo-registry.cn-hangzhou.cr.aliyuncs.com
 docker build --no-cache -f Dockerfile-rocketmq -t cn-cicd-repo-registry.cn-hangzhou.cr.aliyuncs.com/cicd/rocketmq:${TAG} --build-arg version=${ROCKETMQ_VERSION} --build-arg BASE_IMAGE=${BASE_IMAGE} .
 docker push cn-cicd-repo-registry.cn-hangzhou.cr.aliyuncs.com/cicd/rocketmq:${TAG}
