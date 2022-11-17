@@ -66,6 +66,8 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      imagePullSecrets:
+        - name: onetest-regcred
       containers:
       - name: broker
         image: {{ $image | quote }}
