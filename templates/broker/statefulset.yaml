@@ -70,7 +70,9 @@ spec:
       - name: broker
         image: {{ $image | quote }}
         command:
-          {{ toYaml .Values.broker.command.cmd | nindent 12 }}
+          - /bin/sh
+          - -c
+          - ./mqbroker
         {{- if $.Values.nameserver.image.pullPolicy }}
         imagePullPolicy: {{ $.Values.nameserver.image.pullPolicy | quote }}
         {{- end }}

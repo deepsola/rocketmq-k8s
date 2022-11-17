@@ -50,7 +50,9 @@ spec:
         imagePullPolicy: {{ .Values.nameserver.image.pullPolicy | quote }}
         {{- end }}
         command:
-          {{ toYaml .Values.nameserver.command.cmd | nindent 12 }}
+          - /bin/sh
+          - -c
+          - ./mqnamesrv
         ports:
         - containerPort: 9876
           name: main
