@@ -48,7 +48,8 @@ broker:
     cmd:
       - /bin/sh
       - -c
-      - ./mqbroker
+      - ./mqbroker 
+      - --enable-proxy
 
   affinityOverride: {}
   tolerations: {}
