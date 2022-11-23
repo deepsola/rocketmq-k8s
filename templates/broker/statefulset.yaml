@@ -71,7 +71,7 @@ spec:
       containers:
       - name: broker
         image: {{ $image | quote }}
-        command: |
+        command:
           - /bin/bash
           - -c
           - sleep
