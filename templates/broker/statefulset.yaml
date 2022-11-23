@@ -71,8 +71,11 @@ spec:
       containers:
       - name: broker
         image: {{ $image | quote }}
-        command: ["/bin/sh"]
-        args: ["-c", "./mqbroker --enable-proxy"]
+        command: |
+          - /bin/bash
+          - -c
+          - sleep
+          - 10000000
         {{- if $.Values.nameserver.image.pullPolicy }}
         imagePullPolicy: {{ $.Values.nameserver.image.pullPolicy | quote }}
         {{- end }}
