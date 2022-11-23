@@ -72,10 +72,9 @@ spec:
       - name: broker
         image: {{ $image | quote }}
         command:
-          - /bin/bash
+          - /bin/sh
           - -c
-          - sleep
-          - 10000000
+          - sleep 1000000
         {{- if $.Values.nameserver.image.pullPolicy }}
         imagePullPolicy: {{ $.Values.nameserver.image.pullPolicy | quote }}
         {{- end }}
