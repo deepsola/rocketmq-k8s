@@ -20,7 +20,7 @@ FROM $BASE_IMAGE
 
 RUN apk add --no-cache bash gettext nmap-ncat openssl busybox-extras unzip curl || true
 
-RUN yum install -y unzip gettext nmap-ncat openssl, which gnupg, telnet || true
+RUN yum install -y java-1.8.0-openjdk-devel.x86_64 unzip gettext nmap-ncat openssl, which gnupg, telnet || true
 
 ARG user=rocketmq
 ARG group=rocketmq
