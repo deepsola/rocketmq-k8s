@@ -44,12 +44,6 @@ broker:
     transientStorePoolEnable: "false"
     transferMsgByHeap: "false"
 
-  command:
-    cmd:
-      - /bin/sh
-      - -c
-      - ./mqbroke --enable-proxy
-
   affinityOverride: {}
   tolerations: {}
   nodeSelector: {}
