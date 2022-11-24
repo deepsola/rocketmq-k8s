@@ -22,6 +22,8 @@ spec:
         {{- include "rocketmq.selectorLabels" . | nindent 8 }}
         component: proxy
     spec:
+      imagePullSecrets:
+        - name: onetest-regcred
       containers:
       - name: proxy
         image: {{ $image | quote }}
