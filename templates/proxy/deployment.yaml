@@ -1,0 +1,44 @@
+{{- if .Values.proxy.enabled -}}
+{{- $fullName := include "rocketmq.proxy.fullname" . -}}
+{{- $nameserverReplicaCount:= int .Values.nameserver.replicaCount }}
+{{- $nameserverFullName := include "rocketmq.nameserver.fullname" . -}}
+{{- $maxHeapSize := .Values.proxy.jvm.maxHeapSize }}
+{{- $image := printf "%s:%s" .Values.proxy.image.repository .Values.proxy.image.tag }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName | quote }}
+  labels:
+    {{- include "rocketmq.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.proxy.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "rocketmq.selectorLabels" . | nindent 6 }}
+      component: proxy
+  template:
+    metadata:
+      labels:
+        {{- include "rocketmq.selectorLabels" . | nindent 8 }}
+        component: proxy
+    spec:
+      containers:
+      - name: proxy
+        image: {{ $image | quote }}
+        command:
+          - /bin/sh
+          - -c
+          - ./mqproxy
+        {{- if .Values.proxy.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.proxy.image.pullPolicy | quote }}
+        {{- end }}
+        env:
+        - name: NAMESRV_ADDR
+          #value: rocketmq-nameserver:9876
+          value: {{ range $i := until $nameserverReplicaCount }}{{ if gt $i 0 }}{{ printf ";" }}{{ end }}{{ printf "%s-%d.%s:9876" $nameserverFullName $i $nameserverFullName }}{{ end }}
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+        resources:
+          {{- toYaml $.Values.proxy.resources | nindent 10 }}
+{{- end }}

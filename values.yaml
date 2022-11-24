@@ -118,3 +118,22 @@ dashboard:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
+
+proxy:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: "cn-cicd-repo-registry.cn-hangzhou.cr.aliyuncs.com/cicd/rocketmq"
+    pullPolicy: IfNotPresent
+    tag: "4.5.0-alpine-operator-0.3.0"
+
+  jvm:
+    maxHeapSize: 256M
+
+  resources:
+    limits:
+      cpu: 1
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 2Gi

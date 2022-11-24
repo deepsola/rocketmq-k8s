@@ -74,3 +74,10 @@ dashboard
 {{- define "rocketmq.dashboard.fullname" -}}
 {{ include "rocketmq.fullname" . }}-dashboard
 {{- end }}
+
+{{/*
+proxy
+*/}}
+{{- define "rocketmq.proxy.fullname" -}}
+{{ include "rocketmq.fullname" . }}-proxy
+{{- end }}
