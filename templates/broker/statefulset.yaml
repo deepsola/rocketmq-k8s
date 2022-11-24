@@ -75,6 +75,7 @@ spec:
           - /bin/sh
           - -c
           - ./mqbroker
+          - --enable-proxy
         {{- if $.Values.nameserver.image.pullPolicy }}
         imagePullPolicy: {{ $.Values.nameserver.image.pullPolicy | quote }}
         {{- end }}

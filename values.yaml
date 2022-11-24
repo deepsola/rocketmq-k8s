@@ -114,7 +114,7 @@ dashboard:
     #      - chart-example.local
 
 proxy:
-  enabled: true
+  enabled: false
   replicaCount: 1
   image:
     repository: "cn-cicd-repo-registry.cn-hangzhou.cr.aliyuncs.com/cicd/rocketmq"
