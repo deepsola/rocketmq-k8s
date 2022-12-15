@@ -24,6 +24,10 @@ jobs:
         with:
           action: "try"
           helm-values: |
-            - a 
-            -   b
-            -     c : ddd
+             a 
+               b
+                 c : ddd
+             a 
+               b
+                 d : ggg
+                 c : ddd
